@@ -37,7 +37,7 @@
 
    ```bash
    git clone https://github.com/Jenison4ik/Painter_Qt
-   cd raster-paint
+   cd Painter_Qt
    ```
 
 2. Открыть проект в **Qt Creator**  
