@@ -9,14 +9,28 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    // 🎨 Выбор цвета
     connect(ui->btnColor, &QPushButton::clicked, this, [this]() {
         QColor color = QColorDialog::getColor(Qt::black, this, "Выберите цвет");
-        if (color.isValid())
+        if (color.isValid()) {
             ui->canvas->setPenColor(color);
+            ui->canvas->setDrawMode(); // 🔹 автоматический выход из режима ластика
+        }
     });
 
+    // 🧽 Очистка
     connect(ui->btnClear, &QPushButton::clicked, this, [this]() {
         ui->canvas->clear();
+    });
+
+    // ✏️ Карандаш
+    connect(ui->btnPen, &QPushButton::clicked, this, [this]() {
+        ui->canvas->setDrawMode();
+    });
+
+    // 🩹 Ластик
+    connect(ui->btnEraser, &QPushButton::clicked, this, [this]() {
+        ui->canvas->setEraserMode(true);
     });
 }
 
