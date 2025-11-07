@@ -18,7 +18,11 @@ public:
     void clear();
     void setEraserMode(bool enabled);
     void setDrawMode();
-    void setBrushSize(int size); // 🔹 возможность менять размер кисти
+    void setBrushSize(int size);
+    void saveToFile(const QString &filePath); // 🔹 новый метод сохранения
+    enum ToolType { Pen, Line, Rectangle, Ellipse, Eraser };
+    void setTool(ToolType tool);
+    ToolType tool() const { return currentTool; }
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;
@@ -30,11 +34,14 @@ protected:
 
 private:
     QImage image;
+    QImage tempImage;
     QPoint lastPoint;
+    QPoint startPoint;
     QColor penColor;
     QColor lastPenColor;
     bool drawing;
     bool eraserMode = false;
+    ToolType currentTool = Pen;
 
     // 🔹 Для визуализации кисти
     QPoint cursorPos;
